@@ -1,4 +1,4 @@
-# Klipper / Moonsail email / firebase plugin
+# Klipper / Moonsail Email & Firebase plugin
 
 Run this plugin with crontab or whatever you like!<br>
 <i>Feel free to check out the documentation for moonsail and add more to this plugin!</i>
