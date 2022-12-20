@@ -60,17 +60,18 @@ def save_database(key_enter, data_enter):
 	db.child(DATABASE_CHILD).update(data)
 
 
-def send_email(subject_enter, information_enter):
+def send_email(subject_enter, information_enter, send_to):
 	my_sg = sendgrid.SendGridAPIClient(api_key = api_key_sendgrid)
 
 	# Change to your verified sender
-	from_email = Email(sendgrid_from_email)  
+	from_email = Email(sendgrid_from_email, "Enter Your name Here)  
 
 	# Change to your recipient
-	to_email = To(sendgrid_to_email)  
+	to_email = To(send_to)  
 
 	subject = subject_enter
-	content = Content("text/plain", information_enter)
+	content = Content("text/html", information_enter + "<img src='ENTER_URL_TO_IMAGE'>")
+
 
 	mail = Mail(from_email, to_email, subject, content)
 
@@ -118,7 +119,9 @@ if (status == "complete"):
 	get_if_email_sent = user["email_sent"]
 
 	if get_if_email_sent == False:
-		send_email("Your 3D-print is done!", "Your printer is done printing!")
+		send_email("Your 3D-print is done!", "Your printer is done printing!", "enter_your_email")
+		imgURL = "http://" + printer_ip + "/webcam?action=snapshot"
+		urllib.request.urlretrieve(imgURL, "/var/www/html/printer.jpg")
 
 
 
